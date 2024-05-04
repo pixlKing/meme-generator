@@ -77,34 +77,48 @@ const App = (): JSX.Element =>{
     }
   };
 
+  // Zoom logic
+  const [Zoom, setZoom] = useState<string>()
+
+  const handleChangeZoom = (e:ChangeEvent<HTMLInputElement>)=>{
+    setZoom(e.target.value)
+  }
+
 
   return (
     <div className="App">
       <header>
-        <label>
-          <p>Imagen principal:</p>
-          <input className="Button" type="file" accept="image/*" onChange={handleImageUpload} />
+        <label className='FileButton'>
+          <span>Cargar Imagen principal</span>
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
         </label>
-        <label>
-          <p>Imagen secundaria:</p>
-          <input className="Button" type="file" accept="image/*" onChange={handleImageUpload2} />
+        <label className='FileButton'>
+          <span>Cargar Imagen secundaria</span>
+          <input type="file" accept="image/*" onChange={handleImageUpload2} />
+        </label>
+        <label className='ZoomControls'>
+          <p>Zoom de la imagen 2</p>
+          <input className='InputRange' type="range" min="0" max="5" step="0.1" value={Zoom} onChange={handleChangeZoom} disabled={image2 ? false:true}/>
         </label>
       </header>
-      <div className='ImagesCont' ref={divRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
-        {image  && <img className="Image1" src={image}  alt="Imagen 1" style={{ maxWidth: '100%' }} /> }
-        {image2 && <img className="Image2" src={image2} alt="Imagen 2" style={{
-          position: 'absolute',
-          left: position.x,
-          top: position.y,
-          cursor: isDragging ? 'grabbing' : 'grab',
-        }}
-        onMouseDown={handleMouseDown}
-        onDragStart={(e) => e.preventDefault()}
-        draggable="false" /> }
-      </div>
       <footer>
-        <button onClick={captureDiv}>Descargar Meme</button>
+        <button className="Button" onClick={captureDiv} disabled={image?false:true}>Descargar Meme</button>
       </footer>
+      <main>
+        <div className='ImagesCont' ref={divRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+          {image  && <img className="Image1" src={image}  alt="Imagen 1" style={{ maxWidth: '100%' }} /> }
+          {image2 && <img className="Image2" src={image2} alt="Imagen 2" style={{
+            position: 'absolute',
+            left: position.x,
+            top: position.y,
+            cursor: isDragging ? 'grabbing' : 'grab',
+            scale: Zoom
+          }}
+          onMouseDown={handleMouseDown}
+          onDragStart={(e) => e.preventDefault()}
+          draggable="false" /> }
+        </div>
+      </main>
       
     </div>
   );
