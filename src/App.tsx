@@ -1,6 +1,7 @@
 import React, { useState, useRef, ChangeEvent, MouseEvent } from 'react';
 import * as htmlToImage from 'html-to-image';
 import './App.css';
+import IconFile from './icons/icon-file.svg';
 
 const App = (): JSX.Element =>{
   const [image, setImage] = useState<string | null>(null);
@@ -90,10 +91,12 @@ const App = (): JSX.Element =>{
       <header>
         <label className='FileButton'>
           <span>Cargar Imagen principal</span>
+          <img src={IconFile} />
           <input type="file" accept="image/*" onChange={handleImageUpload} />
         </label>
         <label className='FileButton'>
           <span>Cargar Imagen secundaria</span>
+          <img src={IconFile} />
           <input type="file" accept="image/*" onChange={handleImageUpload2} />
         </label>
         <label className='ZoomControls'>
@@ -107,16 +110,8 @@ const App = (): JSX.Element =>{
       <main>
         <div className='ImagesCont' ref={divRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
           {image  && <img className="Image1" src={image}  alt="Imagen 1" style={{ maxWidth: '100%' }} /> }
-          {image2 && <img className="Image2" src={image2} alt="Imagen 2" style={{
-            position: 'absolute',
-            left: position.x,
-            top: position.y,
-            cursor: isDragging ? 'grabbing' : 'grab',
-            scale: Zoom
-          }}
-          onMouseDown={handleMouseDown}
-          onDragStart={(e) => e.preventDefault()}
-          draggable="false" /> }
+          {image2 && <img className="Image2" src={image2} alt="Imagen 2" style={{ position: 'absolute', left: position.x, top: position.y, cursor: isDragging ? 'grabbing':'grab', scale: Zoom }} onMouseDown={handleMouseDown} onDragStart={(e) => e.preventDefault()} draggable="false" /> }
+          {(!image && !image2) && <p>Cargá una imagen!</p> }
         </div>
       </main>
       

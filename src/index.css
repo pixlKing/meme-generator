@@ -28,13 +28,17 @@ main{
   border-radius: 5px;
   padding: 10px;
   overflow: hidden;
+  min-width: 100px;
+  min-height: 100px;
+  display: flex;
+  place-items: center;
 }
 
 .ImagesCont{
   position: relative;
 }
 .Image1{
-
+  max-height: 90vh;
 }
 .Image2{
   position: absolute;
@@ -47,7 +51,8 @@ main{
   border-radius: 5px;
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  gap: 5px;
+  justify-content: space-between;
   margin: 0 0 20px;
   padding: 10px 10px;
   text-align: center;
