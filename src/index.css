@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App{
+  display: flex;
+  flex-flow: column;
+  place-items: center;
+}
+header{
+  display: flex;
+  flex-flow: column;
+}
+.ImagesCont{
+  position: relative;
+}
+.Image1{}
+.Image2{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.Button{
+  appearance: none;
+}
+.Controls{
+
+}
